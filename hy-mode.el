@@ -102,6 +102,7 @@ Examples:
     (modify-syntax-entry ?\, "_" table)
     (modify-syntax-entry ?\| "_" table)
     (modify-syntax-entry ?\# "_" table)
+    (modify-syntax-entry ?\- "_" table)
 
     ;; Note that @ is a valid symbol token but in almost all usages we would
     ;; rather the symbol for ~@foo to be recognized as foo and not @foo.
