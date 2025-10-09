@@ -42,6 +42,8 @@
 
 ;;; Code:
 
+(defvar paredit-mode)
+
 (require 'hy-base)
 
 (require 'hy-font-lock)
@@ -110,6 +112,12 @@ Examples:
 
     table)
   "The `hy-mode' syntax table.")
+
+(defun hy-paredit-setup ()
+  "Make \"paredit-mode\" play nice with `hy-mode'."
+  (when (>= paredit-version 21)
+    (define-key hy-mode-map "{" #'paredit-open-curly)
+    (define-key hy-mode-map "}" #'paredit-close-curly)))
 
 (defconst inferior-hy-mode-syntax-table (copy-syntax-table hy-mode-syntax-table)
   "`inferior-hy-mode' inherits `hy-mode-syntax-table'.")
@@ -290,6 +298,8 @@ commands."
   (hy-mode--setup-syntax)
 
   (hy-mode--support-smartparens)
+
+  (add-hook 'paredit-mode-hook #'hy-paredit-setup)
 
   (when hy-jedhy--enable?
     (hy-mode--setup-jedhy)
